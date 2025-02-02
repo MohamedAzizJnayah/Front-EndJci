@@ -9,6 +9,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { ReservationComponent } from './reservation/reservation.component';
 import { RechercheComponent } from './recherche/recherche.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
+import { SatisticComponent } from './satistic/satistic.component';
+
 
 @NgModule({
   declarations: [
@@ -16,7 +18,8 @@ import { SidebarComponent } from './sidebar/sidebar.component';
     HomeComponent,
     ReservationComponent,
     RechercheComponent,
-    SidebarComponent
+    SidebarComponent,
+    SatisticComponent,
   ],
   imports: [
     BrowserModule,

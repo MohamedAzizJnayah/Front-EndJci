@@ -1,0 +1,31 @@
+/* invite.component.css */
+.invite-stats {
+  margin: 20px;
+}
+
+.invite-stats h2 {
+  color: #007bff;
+}
+
+.invite-stats p {
+  font-size: 1.1em;
+  margin-bottom: 10px;
+}
+
+.invite-stats ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.invite-stats li {
+  background-color: #f9f9f9;
+  margin: 5px 0;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.invite-stats h3 {
+  margin-top: 20px;
+  font-size: 1.2em;
+  color: #28a745;
+}
