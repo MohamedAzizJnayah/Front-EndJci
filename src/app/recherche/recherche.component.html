@@ -1,0 +1,27 @@
+<div class="recherche-container">
+  <h2>Recherche d'invité</h2>
+
+  <!-- Champ de recherche -->
+  <input 
+    type="text" 
+    placeholder="Rechercher un invité" 
+    [(ngModel)]="searchQuery" 
+    class="search-input" 
+  />
+
+  <div *ngIf="searchQuery">
+    <h3>Résultats de recherche</h3>
+    <ul *ngIf="filteredInvites.length > 0; else noResults">
+      <li *ngFor="let invite of filteredInvites">
+        <strong>{{ invite.nom }}</strong> - {{ invite.email }}
+      </li>
+    </ul>
+    <ng-template #noResults>
+      <p>Aucun invité trouvé.</p>
+    </ng-template>
+  </div>
+
+  <div *ngIf="!searchQuery">
+    <p>Entrez un nom pour rechercher un invité.</p>
+  </div>
+</div>

@@ -1,0 +1,46 @@
+/* Style de base */
+
+.home-container {
+  font-family: Arial, sans-serif;
+}
+
+/* Navbar Styles */
+.navbar {
+  background-color: var(--primary-color);
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+background-color: white;
+}
+
+.navbar-logo {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-brand {
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-left: 1rem;
+  color: white;
+}
+.logo {
+  height: 60px; /* Hauteur standard */
+  width: auto; /* Maintient les proportions de l'image */
+  margin-right: 1rem; /* Espace entre le logo et le texte */
+}
+
+.navbar-links a {
+  margin-left: 1.5rem;
+  color: white;
+  text-decoration: none;
+  font-size: 1.1rem;
+}
+
+.navbar-links a:hover {
+  color: var(--secondary-color);
+  transition: color 0.3s ease;
+}
