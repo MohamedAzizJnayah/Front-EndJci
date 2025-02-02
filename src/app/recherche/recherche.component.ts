@@ -11,6 +11,7 @@ export class RechercheComponent {
   invites: any[] = []; // Liste des invités
   successMessage: string = ''; // Message de confirmation
   errorMessage: string = ''; // Message d'erreur
+  loading: boolean = false; // État du loader
 
   constructor(private http: HttpClient) {}
 
@@ -28,7 +29,6 @@ export class RechercheComponent {
             telephone: item[3], // Téléphone
             paiement: item[4]   // Paiement
           }));
-          console.log('Données récupérées avec succès.');
         }, error => {
           console.error('Erreur lors de la récupération des données', error);
         });
@@ -39,45 +39,40 @@ export class RechercheComponent {
 
   // Méthode pour mettre à jour le paiement
   updatePaiement(cin: string) {
+    this.loading = true; // Activation du loader
     const requestData = { paiement: 'Payé' };
   
     this.http.put(`http://localhost:8088/sheets/updatePaiement?cin=${cin}`, requestData, { responseType: 'text' })
       .subscribe(response => {
         console.log('Réponse de l’API:', response);
         
-        // Affichage du message de succès
         this.successMessage = "Paiement confirmé avec succès !";
         
-        // Vérifier immédiatement si le paiement a bien été mis à jour
         setTimeout(() => {
           this.verifyPaiement(cin);
-        }, 1000); // Attendre 1 seconde avant de vérifier
+        }, 1000);
       }, error => {
         console.error('Erreur lors de la mise à jour du paiement', error);
         this.errorMessage = "Erreur lors du paiement. Veuillez réessayer.";
-        setTimeout(() => this.errorMessage = '', 3000); // Efface le message après 3s
+        this.loading = false; // Désactivation du loader en cas d'erreur
       });
   }
-  
 
   // Vérifie si le paiement est bien mis à jour
   verifyPaiement(cin: string) {
     this.http.get<any[]>(`http://localhost:8088/sheets/search?query=${cin}`)
       .subscribe(data => {
+        this.loading = false; // Désactiver le loader
         if (data.length > 0 && data[0][4] === 'Payé') {
           this.successMessage = "Paiement confirmé avec succès !";
-          this.fetchData(); // Rafraîchir la liste des invités
+          this.fetchData();
         } else {
           this.errorMessage = "Échec de la confirmation du paiement.";
         }
-        setTimeout(() => {
-          this.successMessage = '';
-          this.errorMessage = '';
-        }, 3000); // Efface le message après 3s
       }, error => {
         console.error('Erreur lors de la vérification du paiement', error);
         this.errorMessage = "Erreur lors de la vérification du paiement.";
-        setTimeout(() => this.errorMessage = '', 3000);
+        this.loading = false; // Désactivation du loader
       });
   }
 }

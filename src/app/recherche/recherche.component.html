@@ -20,8 +20,10 @@
           {{ invite.paiement }}
         </span>
 
-        <!-- Bouton de paiement -->
-        <button *ngIf="invite.paiement !== 'Payé'" (click)="updatePaiement(invite.cin)">
+        <!-- Bouton de paiement avec désactivation lors du chargement -->
+        <button *ngIf="invite.paiement !== 'Payé'" 
+                (click)="updatePaiement(invite.cin)" 
+                [disabled]="loading">
           Payer
         </button>
       </li>
@@ -30,6 +32,12 @@
     <ng-template #noResults>
       <p>Aucun invité trouvé.</p>
     </ng-template>
+
+    <!-- Loader affiché pendant le paiement -->
+    <div *ngIf="loading" class="loader-container">
+      <div class="loader"></div>
+      <p>Traitement en cours...</p>
+    </div>
 
     <!-- Affichage du message de confirmation ou d'erreur -->
     <div *ngIf="successMessage" class="success-message">
