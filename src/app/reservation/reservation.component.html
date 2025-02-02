@@ -1,97 +1,121 @@
-    <div class="inscription-container">
-    <h2>Formulaire d'Inscription</h2>
-    <form #inscriptionForm="ngForm" (ngSubmit)="onSubmit(inscriptionForm)">
-        <div class="form-group">
-        <label for="cin">CIN</label>
-        <input
-            type="text"
-            id="cin"
-            name="cin"
-            [(ngModel)]="formData.cin"
-            required
-            #cin="ngModel"
-            class="form-control"
-        />
-        <div *ngIf="cin.invalid && cin.touched" class="error-message">CIN est requis.</div>
-        </div>
-
-        <div class="form-group">
-        <label for="nom">Nom</label>
-        <input
-            type="text"
-            id="nom"
-            name="nom"
-            [(ngModel)]="formData.nom"
-            required
-            #nom="ngModel"
-            class="form-control"
-        />
-        <div *ngIf="nom.invalid && nom.touched" class="error-message">Nom est requis.</div>
-        </div>
-
-        <div class="form-group">
-        <label for="prenom">Prénom</label>
-        <input
-            type="text"
-            id="prenom"
-            name="prenom"
-            [(ngModel)]="formData.prenom"
-            required
-            #prenom="ngModel"
-            class="form-control"
-        />
-        <div *ngIf="prenom.invalid && prenom.touched" class="error-message">Prénom est requis.</div>
-        </div>
-
-        <div class="form-group">
-        <label for="tel">Téléphone</label>
-        <input
-            type="tel"
-            id="tel"
-            name="tel"
-            [(ngModel)]="formData.tel"
-            required
-            pattern="^[0-9]{8}$"
-            #tel="ngModel"
-            class="form-control"
-        />
-        <div *ngIf="tel.invalid && tel.touched" class="error-message">Téléphone invalide.</div>
-        </div>
-
-        <div class="form-group">
-        <label for="olm">OLM</label>
-        <input
-            type="text"
-            id="olm"
-            name="olm"
-            [(ngModel)]="formData.olm"
-            required
-            #olm="ngModel"
-            class="form-control"
-        />
-        <div *ngIf="olm.invalid && olm.touched" class="error-message">OLM est requis.</div>
-        </div>
-
-        <div class="form-group">
-        <label for="paiement">Paiement</label>
-        <select
-            id="paiement"
-            name="paiement"
-            [(ngModel)]="formData.paiement"
-            required
-            #paiement="ngModel"
-            class="form-control"
-        >
-            <option value="" disabled selected>Choisir une option</option>
-            <option value="carte">Carte bancaire</option>
-            <option value="virement">Virement bancaire</option>
-            <option value="especes">Espèces</option>
-        </select>
-        <div *ngIf="paiement.invalid && paiement.touched" class="error-message">Paiement est requis.</div>
-        </div>
-
-        <button type="submit" [disabled]="inscriptionForm.invalid" class="btn btn-primary">
-        S'inscrire
-        </button>
-    </form>
+<div class="inscription-container">
+  <h2>Formulaire d'Inscription</h2>
+  <!-- Boîte de dialogue d'alerte -->
+  <div *ngIf="showSuccessMessage" class="alert-overlay">
+    <div class="alert-box">
+      <h3>✅ Inscription réussie !</h3>
+      <p>Votre inscription a été enregistrée avec succès.</p>
+      <button (click)="closeAlert()" class="btn btn-success">OK</button>
     </div>
+  </div>
+<!----------------------------------------------->
+  <form #inscriptionForm="ngForm" (ngSubmit)="onSubmit(inscriptionForm)">
+    <div class="form-group">
+      <label for="cin">CIN</label>
+      <input
+        type="text"
+        id="cin"
+        name="cin"
+        [(ngModel)]="formData.cin"
+        required
+        #cin="ngModel"
+        class="form-control"
+      />
+      <div *ngIf="cin.invalid && cin.touched" class="error-message">
+        CIN est requis.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="nom">Nom</label>
+      <input
+        type="text"
+        id="nom"
+        name="nom"
+        [(ngModel)]="formData.nom"
+        required
+        #nom="ngModel"
+        class="form-control"
+      />
+      <div *ngIf="nom.invalid && nom.touched" class="error-message">
+        Nom est requis.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="prenom">Prénom</label>
+      <input
+        type="text"
+        id="prenom"
+        name="prenom"
+        [(ngModel)]="formData.prenom"
+        required
+        #prenom="ngModel"
+        class="form-control"
+      />
+      <div *ngIf="prenom.invalid && prenom.touched" class="error-message">
+        Prénom est requis.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="tel">Téléphone</label>
+      <input
+        type="tel"
+        id="tel"
+        name="tel"
+        [(ngModel)]="formData.tel"
+        required
+        pattern="^[0-9]{8}$"
+        #tel="ngModel"
+        class="form-control"
+      />
+      <div *ngIf="tel.invalid && tel.touched" class="error-message">
+        Téléphone invalide.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="olm">OLM</label>
+      <input
+        type="text"
+        id="olm"
+        name="olm"
+        [(ngModel)]="formData.olm"
+        required
+        #olm="ngModel"
+        class="form-control"
+      />
+      <div *ngIf="olm.invalid && olm.touched" class="error-message">
+        OLM est requis.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="paiement">Paiement</label>
+      <select
+        id="paiement"
+        name="paiement"
+        [(ngModel)]="formData.paiement"
+        required
+        #paiement="ngModel"
+        class="form-control"
+      >
+        <option value="" disabled selected>Choisir une option</option>
+        <option value="Payé">Payé</option>
+        <option value="Non Payé">Non Payé</option>
+      </select>
+      <div *ngIf="paiement.invalid && paiement.touched" class="error-message">
+        Paiement est requis.
+      </div>
+    </div>
+
+    <button
+      type="submit"
+      [disabled]="inscriptionForm.invalid"
+      class="btn btn-primary"
+    >
+      S'inscrire
+    </button>
+  </form>
+</div>
