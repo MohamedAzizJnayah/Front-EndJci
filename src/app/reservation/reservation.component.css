@@ -1,42 +1,131 @@
+/* Importation d'une police depuis Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+/* Conteneur principal */
 .inscription-container {
-  width: 50%;
-  margin: 0 auto;
+  width: 40%;
+  margin: 30px auto;
   padding: 20px;
-  background-color: #f9f9f9;
+  background-color: #ffffff;
   border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease;
+  font-family: 'Roboto', sans-serif; /* Police améliorée */
 }
 
+.inscription-container:hover {
+  transform: scale(1.02);
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Titre du formulaire */
 h2 {
   text-align: center;
   margin-bottom: 20px;
+  font-size: 22px; /* Taille du titre */
+  color: #333;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  animation: fadeIn 1s ease-in-out;
 }
 
+/* Groupes de formulaire */
 .form-group {
   margin-bottom: 15px;
+  position: relative;
+  animation: slideIn 0.5s ease-out;
 }
 
+/* Champ de saisie */
 .form-control {
   width: 100%;
-  padding: 10px;
+  padding: 10px; /* Espacement plus confortable */
   border: 1px solid #ccc;
-  border-radius: 4px;
+  border-radius: 6px;
+  font-size: 14px; /* Taille de texte lisible */
+  background-color: #f9f9f9;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  font-family: 'Roboto', sans-serif;
 }
 
+.form-control:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
+}
+
+/* Messages d'erreur */
 .error-message {
-  color: red;
-  font-size: 12px;
+  color: #e74c3c;
+  font-size: 13px; /* Taille du message d'erreur */
+  position: absolute;
+  bottom: -18px;
+  left: 0;
+  opacity: 0;
+  animation: fadeInError 0.3s forwards;
+  font-family: 'Roboto', sans-serif;
 }
 
+.form-group.ng-touched.ng-invalid .error-message {
+  opacity: 1;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideIn {
+  0% {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInError {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Bouton d'inscription */
 button {
   width: 100%;
   padding: 10px;
   background-color: #007bff;
   color: white;
   border: none;
-  border-radius: 4px;
+  border-radius: 6px;
   cursor: pointer;
+  font-size: 15px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  font-family: 'Roboto', sans-serif;
+}
+
+button:hover {
+  background-color: #0056b3;
+  transform: translateY(-2px);
 }
 
 button:disabled {
   background-color: #ddd;
+  cursor: not-allowed;
+}
+
+/* Effet sur le formulaire quand il est soumis */
+button:active {
+  transform: scale(0.98);
 }
