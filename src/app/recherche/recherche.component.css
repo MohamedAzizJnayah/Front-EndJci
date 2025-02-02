@@ -88,6 +88,18 @@ p {
   animation: fadeIn 1.5s ease-in-out;
 }
 
+.paiement {
+  font-weight: bold;
+}
+
+.payé {
+  color: green; /* Paiement payé en vert */
+}
+
+.non-paye {
+  color: red; /* Paiement non payé en rouge */
+}
+
 /* Animation */
 @keyframes fadeIn {
   0% {

@@ -2,23 +2,42 @@
   <h2>Recherche d'invité</h2>
 
   <!-- Champ de recherche -->
-  <input 
-    type="text" 
-    placeholder="Rechercher un invité" 
-    [(ngModel)]="searchQuery" 
-    class="search-input" 
+  <input
+    type="text"
+    placeholder="Rechercher un invité"
+    [(ngModel)]="searchQuery"
+    (ngModelChange)="fetchData()"
+    class="search-input"
   />
 
   <div *ngIf="searchQuery">
     <h3>Résultats de recherche</h3>
-    <ul *ngIf="filteredInvites.length > 0; else noResults">
-      <li *ngFor="let invite of filteredInvites">
-        <strong>{{ invite.nom }}</strong> - {{ invite.email }}
+    <ul *ngIf="invites.length > 0; else noResults">
+      <li *ngFor="let invite of invites">
+        <strong>{{ invite.cin }}</strong> - {{ invite.nom }} - 
+        {{ invite.email }} - {{ invite.telephone }} - 
+        <span [ngClass]="{'payé': invite.paiement === 'Payé', 'non-paye': invite.paiement !== 'Payé'}">
+          {{ invite.paiement }}
+        </span>
+
+        <!-- Bouton de paiement -->
+        <button *ngIf="invite.paiement !== 'Payé'" (click)="updatePaiement(invite.cin)">
+          Payer
+        </button>
       </li>
     </ul>
+    
     <ng-template #noResults>
       <p>Aucun invité trouvé.</p>
     </ng-template>
+
+    <!-- Affichage du message de confirmation ou d'erreur -->
+    <div *ngIf="successMessage" class="success-message">
+      {{ successMessage }}
+    </div>
+    <div *ngIf="errorMessage" class="error-message">
+      {{ errorMessage }}
+    </div>
   </div>
 
   <div *ngIf="!searchQuery">
