@@ -1,7 +1,6 @@
 <div class="recherche-container">
   <h2>Recherche d'invité</h2>
 
-  <!-- Champ de recherche -->
   <input
     type="text"
     placeholder="Rechercher un invité"
@@ -13,33 +12,40 @@
   <div *ngIf="searchQuery">
     <h3>Résultats de recherche</h3>
     <ul *ngIf="invites.length > 0; else noResults">
-      <li *ngFor="let invite of invites">
-        <strong>{{ invite.cin }}</strong> - {{ invite.nom }} - 
-        {{ invite.email }} - {{ invite.telephone }} - 
-        <span [ngClass]="{'payé': invite.paiement === 'Payé', 'non-paye': invite.paiement !== 'Payé'}">
+      <li *ngFor="let invite of invites" class="invite-item">
+        <strong>{{ invite.cin }}</strong> - {{ invite.nom }} -
+        {{ invite.email }} - {{ invite.telephone }} -
+        <span
+          [ngClass]="{
+            paye: invite.paiement === 'Payé',
+            'non-paye': invite.paiement !== 'Payé'
+          }"
+        >
           {{ invite.paiement }}
         </span>
 
-        <!-- Bouton de paiement avec désactivation lors du chargement -->
-        <button *ngIf="invite.paiement !== 'Payé'" 
-                (click)="updatePaiement(invite.cin)" 
-                [disabled]="loading">
-          Payer
+        <button
+          *ngIf="invite.paiement !== 'Payé'"
+          (click)="updatePaiement(invite.cin)"
+          [disabled]="loading"
+          class="pay-button"
+        >
+          💳 Payer
         </button>
+
+        <button (click)="printInvite(invite)">🖨️ Imprimer</button>
       </li>
     </ul>
-    
+
     <ng-template #noResults>
       <p>Aucun invité trouvé.</p>
     </ng-template>
 
-    <!-- Loader affiché pendant le paiement -->
     <div *ngIf="loading" class="loader-container">
       <div class="loader"></div>
       <p>Traitement en cours...</p>
     </div>
 
-    <!-- Affichage du message de confirmation ou d'erreur -->
     <div *ngIf="successMessage" class="success-message">
       {{ successMessage }}
     </div>
