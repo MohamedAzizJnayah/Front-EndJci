@@ -1,16 +1,38 @@
-<!-- satistic.component.html -->
 <div class="invite-stats">
   <h2>Statistiques des Invités</h2>
-  <p>Total des invités inscrits: {{ totalInvites }}</p>
-  <p>Total des invités payés: {{ paidInvites }}</p>
-  <p>Total des invités non payés: {{ unpaidInvites }}</p>
+  <p>Total des invités inscrits: <strong>{{ totalInvites }}</strong></p>
+  <p>Total des invités payés: <strong>{{ paidInvites }}</strong></p>
+  <p>Total des invités non payés: <strong>{{ unpaidInvites }}</strong></p>
 
-  <div *ngFor="let olm of olmKeys">
-    <h3>OLM: {{ olm }}</h3>
-    <ul>
-      <li *ngFor="let invite of invitesGroupedByOlm[olm]">
-        {{ invite[1] }} {{ invite[2] }} - {{ invite[3] }} - {{ invite[4] }}
-      </li>
-    </ul>
+  <!-- Affichage du graphique en camembert (Pie Chart) avec animation -->
+  <div class="chart-container">
+    <p-chart type="pie" [data]="chartData" [options]="chartOptions" class="chart"></p-chart>
+  </div>
+
+  <!-- Affichage du graphique à barres avec animation -->
+  <div class="chart-container">
+    <p-chart type="bar" [data]="barChartData" [options]="barChartOptions" class="chart"></p-chart>
+  </div>
+
+  <!-- Affichage des données des invités groupés par OLM -->
+  <div *ngIf="olmKeys.length > 0; else noData" class="olm-group">
+    <div *ngFor="let olm of olmKeys" class="olm-item">
+      <h3 class="olm-title">OLM: {{ olm }}</h3>
+      <ul class="olm-list">
+        <li *ngFor="let invite of invitesGroupedByOlm[olm]" class="olm-list-item">
+          {{ invite[1] }} {{ invite[2] }} - {{ invite[3] }} - {{ invite[4] }}
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Template pour afficher un message lorsque aucune donnée n'est disponible -->
+  <ng-template #noData>
+    <p class="no-data">Aucune donnée disponible pour les invités.</p>
+  </ng-template>
+
+  <!-- Affichage des erreurs -->
+  <div *ngIf="errorMessage" class="error-message">
+    <p>{{ errorMessage }}</p>
   </div>
 </div>

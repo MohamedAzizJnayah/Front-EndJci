@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { BrowserModule } from '@angular/platform-browser'; // Suppression de provideClientHydration ici
+import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -9,8 +9,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { ReservationComponent } from './reservation/reservation.component';
 import { RechercheComponent } from './recherche/recherche.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
-import { SatisticComponent } from './satistic/satistic.component';
-
+import { SatisticComponent } from './satistic/satistic.component'; // Corrected import
+import { ChartModule } from 'primeng/chart';
 
 @NgModule({
   declarations: [
@@ -19,7 +19,7 @@ import { SatisticComponent } from './satistic/satistic.component';
     ReservationComponent,
     RechercheComponent,
     SidebarComponent,
-    SatisticComponent,
+    SatisticComponent // Corrected declaration
   ],
   imports: [
     BrowserModule,
@@ -27,9 +27,12 @@ import { SatisticComponent } from './satistic/satistic.component';
     AppRoutingModule,
     RouterModule,
     ReactiveFormsModule,
-    FormsModule ,
+    FormsModule,
+    ChartModule
+    
+   
   ],
-  providers: [], // Suppression temporaire de provideClientHydration()
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
