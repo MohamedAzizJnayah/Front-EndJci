@@ -121,52 +121,68 @@ export class RechercheComponent {
 
   // Générer une page imprimable pour un seul invité
   printInvite(invite: any) {
-    let printContent = `
-     <!DOCTYPE html>
+    let printContent = `<!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Badge Invité - JCI Événement</title>
     <style>
+        @page {
+            size: 85.60mm 53.98mm;
+            margin: 0;
+        }
         body {
             font-family: "Arial", sans-serif;
-            background-color: #f5f5f5;
-            padding: 20px;
-            text-align: center;
+            background-color: #f0f4f8;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #333;
         }
         .badge-container {
-            width: 300px;
-            margin: auto;
+            width: 85.60mm;
+            height: 53.98mm;
             background: white;
-            border-radius: 15px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            padding: 5mm;
             text-align: center;
-            border-top: 5px solid #007bff;
+            border: 2px solid #007bff;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            box-sizing: border-box;
         }
         .badge-header {
-            font-size: 18px;
+            font-size: 12px;
             font-weight: bold;
             color: #007bff;
-            margin-bottom: 10px;
+            margin-bottom: 5px;
+            letter-spacing: 1px;
         }
         .jci-logo {
-            width: 80px;
-            margin-bottom: 10px;
+            width: 15mm;
+            margin-bottom: 5px;
         }
         .badge-info p {
-            font-size: 16px;
-            color: #333;
-            margin: 5px 0;
+            font-size: 10px;
+            color: #555;
+            margin: 2px 0;
+            line-height: 1.2;
         }
         .badge-status {
-            padding: 8px;
-            border-radius: 5px;
+            padding: 4px;
+            border-radius: 3px;
             font-weight: bold;
             display: inline-block;
-            margin-top: 10px;
-            font-size: 14px;
+            margin-top: 5px;
+            font-size: 9px;
+            text-transform: uppercase;
         }
         .paid {
             background: #28a745;
@@ -176,38 +192,23 @@ export class RechercheComponent {
             background: #dc3545;
             color: white;
         }
-        .print-btn {
-            margin-top: 15px;
-            padding: 10px 15px;
-            font-size: 16px;
-            color: white;
-            background: #007bff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        .print-btn:hover {
-            background: #0056b3;
-        }
     </style>
 </head>
 <body>
 
     <div class="badge-container">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/JCI_Logo.png/120px-JCI_Logo.png" alt="JCI Logo" class="jci-logo">
+        <img src="assets/jci-eljem.ico" alt="JCI Logo" class="jci-logo">
         <div class="badge-header">JCI Événement</div>
         
         <div class="badge-info">
             <p><strong>CIN:</strong> ${invite.cin}</p>
             <p><strong>Nom:</strong> ${invite.nom}</p>
-            <p><strong>Email:</strong> ${invite.email}</p>
-            <p><strong>Téléphone:</strong> ${invite.telephone}</p>
-            <p class="badge-status ${invite.paiement === 'Payé' ? 'paid' : 'unpaid'}">
-                ${invite.paiement}
-            </p>
+            <p><strong>OLM:</strong> ${invite.telephone}</p>
         </div>
-        
-        <button class="print-btn" onclick="window.print();">🖨️ Imprimer</button>
+
+        <div class="badge-status ${invite.paiement === 'Payé' ? 'paid' : 'unpaid'}">
+            ${invite.paiement}
+        </div>
     </div>
 
     <script>
@@ -219,11 +220,11 @@ export class RechercheComponent {
 
 </body>
 </html>
-
-    `;
+`;
 
     this.printContent(printContent);
-  }
+}
+
 
   // Fonction pour ouvrir une nouvelle fenêtre et imprimer le contenu
   private printContent(content: string) {

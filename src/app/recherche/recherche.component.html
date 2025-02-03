@@ -33,7 +33,7 @@
           💳 Payer
         </button>
 
-        <button (click)="printInvite(invite)">🖨️ Imprimer</button>
+        <button *ngIf="invite.paiement === 'Payé'" (click)="printInvite(invite)">🖨️ Imprimer</button>
       </li>
     </ul>
 
